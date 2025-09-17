@@ -382,18 +382,15 @@ with tabs[2]:
 
     # --- Section 3: Evaluation Metrics ---
     st.markdown("### 📊 Evaluation Metrics on Validation Set")
-    st.markdown("""
-    We evaluated Petra's CNN on a held-out validation set.
+    evaluation cards: st.markdown("""We evaluated Petra's CNN on a held-out validation set.""") 
+    AccurancyCard, PrecisionCard, RecallCard,F1Card,LossCard = st.columns(5, border=True)
 
-    - **Accuracy**: 0.93  
-    - **Precision**: 0.91  
-    - **Recall**: 0.89  
-    - **F1-score**: 0.90  
-    - **Loss**: 0.18
-
-    These metrics show that Petra performs reliably in identifying oil spill patterns 
-    while minimizing false positives on clean ocean images.
-    """)
+    AccurancyCard.markdown("Accuracy: 0.93 ")
+    PrecisionCard.markdown("Precision: 0.91")
+    RecallCard.markdown("Recall: 0.89")
+    F1Card.markdown("F1-score: 0.90 ")
+    LossCard.markdown("Loss: 0.18")
+    st.markdown("""These metrics show that Petra performs reliably in identifying oil spill patterns while minimizing false positives on clean ocean images.""")
 
     st.success("Petra achieved over **93% accuracy** distinguishing oil spills from clean sea surfaces.")
 
@@ -443,3 +440,4 @@ with tabs[3]:
                 st.info("Preview not available. The file will still be sent to the API.")
 
     st.caption("Expected FastAPI interface: POST `/predict` with either multipart file (`file`) or JSON `{url: ...}`.")
+
