@@ -382,17 +382,44 @@ with tabs[2]:
 
     # --- Section 3: Evaluation Metrics ---
     st.markdown("### 📊 Evaluation Metrics on Validation Set")
-    st.markdown("""We evaluated Petra's CNN on a held-out validation set.""") 
-    AccurancyCard, PrecisionCard, RecallCard,F1Card,LossCard = st.columns(5, border=True)
-
-    AccurancyCard.markdown("Accuracy: 0.93 ")
-    PrecisionCard.markdown("Precision: 0.91")
-    RecallCard.markdown("Recall: 0.89")
-    F1Card.markdown("F1-score: 0.90 ")
-    LossCard.markdown("Loss: 0.18")
-    st.markdown("""These metrics show that Petra performs reliably in identifying oil spill patterns while minimizing false positives on clean ocean images.""")
-
-    st.success("Petra achieved over **93% accuracy** distinguishing oil spills from clean sea surfaces.")
+    
+    # --- Stats badges ---
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        st.metric(label="Accuracy", value="93%")
+    with col2:
+        st.metric(label="Precision", value="91%")
+    with col3:
+        st.metric(label="Recall", value="89%")
+    with col4:
+        st.metric(label="F1-Score", value="0.90")
+    with col5:
+        st.metric(label="Loss", value="0.18")
+    
+    # --- Description block ---
+    st.markdown(
+        """
+        <div style="
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid #4CAF50;
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            color: #e0e0e0;
+        ">
+        <h4 style="margin-top:0; color:#4CAF50;">Model Performance Summary</h4>
+        Petra's CNN demonstrates strong generalization on unseen validation data:
+        <ul>
+          <li>⚡ High accuracy and balanced precision/recall indicate robust classification.</li>
+          <li>🌊 Minimal false positives on clean ocean images.</li>
+          <li>🧠 Excellent ability to detect subtle oil spill features in complex satellite backgrounds.</li>
+        </ul>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    st.success("✅ Petra achieved over **93% accuracy** distinguishing oil spills from clean sea surfaces.")
 
 # ---------------------------
 # TAB 3: TEST MODEL
@@ -440,5 +467,6 @@ with tabs[3]:
                 st.info("Preview not available. The file will still be sent to the API.")
 
     st.caption("Expected FastAPI interface: POST `/predict` with either multipart file (`file`) or JSON `{url: ...}`.")
+
 
 
