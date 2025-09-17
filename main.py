@@ -380,39 +380,64 @@ with tabs[2]:
         st.markdown("#### 🛢️ gas Spill")
         st.image("train_gas.jpg", caption="Clean Sea Example 1")
 
-    # --- Section 3: Evaluation Metrics ---
     st.markdown("### 📊 Evaluation Metrics on Validation Set")
+
+    st.markdown("""
+    <style>
+    .metric-box {
+      background: linear-gradient(145deg, rgba(30,30,30,0.95), rgba(15,15,15,0.95));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+    }
+    .metric-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+    .metric-title {
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4CAF50;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
-    # --- Stats badges ---
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        st.metric(label="Accuracy", value="93%")
+        st.markdown('<div class="metric-box"><div class="metric-title">Accuracy</div><div class="metric-value">93%</div></div>', unsafe_allow_html=True)
     with col2:
-        st.metric(label="Precision", value="91%")
+        st.markdown('<div class="metric-box"><div class="metric-title">Precision</div><div class="metric-value">91%</div></div>', unsafe_allow_html=True)
     with col3:
-        st.metric(label="Recall", value="89%")
+        st.markdown('<div class="metric-box"><div class="metric-title">Recall</div><div class="metric-value">89%</div></div>', unsafe_allow_html=True)
     with col4:
-        st.metric(label="F1-Score", value="0.90")
+        st.markdown('<div class="metric-box"><div class="metric-title">F1-Score</div><div class="metric-value">0.90</div></div>', unsafe_allow_html=True)
     with col5:
-        st.metric(label="Loss", value="0.18")
+        st.markdown('<div class="metric-box"><div class="metric-title">Loss</div><div class="metric-value">0.18</div></div>', unsafe_allow_html=True)
     
-    # --- Description block ---
     st.markdown(
         """
         <div style="
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             border-left: 4px solid #4CAF50;
             padding: 1.2rem 1.5rem;
-            border-radius: 10px;
-            margin-top: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
             color: #e0e0e0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
         ">
-        <h4 style="margin-top:0; color:#4CAF50;">Model Performance Summary</h4>
-        Petra's CNN demonstrates strong generalization on unseen validation data:
+        Petra's CNN shows **strong performance** on unseen data:
         <ul>
-          <li>⚡ High accuracy and balanced precision/recall indicate robust classification.</li>
-          <li>🌊 Minimal false positives on clean ocean images.</li>
-          <li>🧠 Excellent ability to detect subtle oil spill features in complex satellite backgrounds.</li>
+          <li>⚡ High accuracy with balanced precision/recall</li>
+          <li>🌊 Very low false positives on clean ocean images</li>
+          <li>🧠 Robust detection of subtle oil spill patterns</li>
         </ul>
         </div>
         """,
@@ -420,6 +445,7 @@ with tabs[2]:
     )
     
     st.success("✅ Petra achieved over **93% accuracy** distinguishing oil spills from clean sea surfaces.")
+
 
 # ---------------------------
 # TAB 3: TEST MODEL
@@ -467,6 +493,7 @@ with tabs[3]:
                 st.info("Preview not available. The file will still be sent to the API.")
 
     st.caption("Expected FastAPI interface: POST `/predict` with either multipart file (`file`) or JSON `{url: ...}`.")
+
 
 
 
