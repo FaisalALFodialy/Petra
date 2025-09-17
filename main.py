@@ -312,13 +312,14 @@ with tabs[1]:
     st.markdown("### Satellite View (Demo Points)")
     st.caption("Tip: zoom & pan. Style and points are customizable.")
 
-    # pydeck: dark water-style map
+    mapbox_token = st.secrets["MAPBOX_API_KEY"]
+
     layer = pdk.Layer(
         "ScatterplotLayer",
         data=[{"lat": d["lat"], "lon": d["lon"], "name": d["name"], "conf": d["conf"]} for d in DEMO_COORDS],
         get_position='[lon, lat]',
         get_fill_color='[255 * (1-conf), 255 * conf, 30, 200]',
-        get_radius=2500,  # meters (adjust for zoom)
+        get_radius=2500,
         pickable=True,
     )
 
@@ -329,9 +330,12 @@ with tabs[1]:
         layers=[layer],
         initial_view_state=view_state,
         tooltip=tooltip,
-        map_style="mapbox://styles/mapbox/dark-v11",  # requires MAPBOX_API_KEY if not cached
+        map_style="mapbox://styles/mapbox/streets-v12",  # 🌈 colorful style
+        api_keys={"mapbox": mapbox_token},
     )
+
     st.pydeck_chart(r, use_container_width=True)
+
 
     with st.expander("Demo Coordinates"):
         st.code("\n".join([f"({d['lat']}, {d['lon']})  conf={d['conf']}" for d in DEMO_COORDS]), language="text")
