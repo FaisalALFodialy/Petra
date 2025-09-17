@@ -382,7 +382,7 @@ with tabs[2]:
 
     # --- Section 3: Evaluation Metrics ---
     st.markdown("### 📊 Evaluation Metrics on Validation Set")
-    evaluation cards: st.markdown("""We evaluated Petra's CNN on a held-out validation set.""") 
+    st.markdown("""We evaluated Petra's CNN on a held-out validation set.""") 
     AccurancyCard, PrecisionCard, RecallCard,F1Card,LossCard = st.columns(5, border=True)
 
     AccurancyCard.markdown("Accuracy: 0.93 ")
@@ -440,4 +440,5 @@ with tabs[3]:
                 st.info("Preview not available. The file will still be sent to the API.")
 
     st.caption("Expected FastAPI interface: POST `/predict` with either multipart file (`file`) or JSON `{url: ...}`.")
+
 
