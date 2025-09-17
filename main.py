@@ -430,6 +430,7 @@ with tabs[2]:
             padding: 1.2rem 1.5rem;
             border-radius: 12px;
             margin-top: 2rem;
+            margin-bottom: 2rem;
             color: #e0e0e0;
             box-shadow: 0 2px 15px rgba(0,0,0,0.3);
         ">
@@ -493,6 +494,7 @@ with tabs[3]:
                 st.info("Preview not available. The file will still be sent to the API.")
 
     st.caption("Expected FastAPI interface: POST `/predict` with either multipart file (`file`) or JSON `{url: ...}`.")
+
 
 
 
