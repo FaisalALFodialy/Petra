@@ -141,32 +141,66 @@ st.markdown(
 
 
 # ---------------------------
-# HERO VIDEO HEADER
+# HERO VIDEO INTRO (AUTOPLAY)
 # ---------------------------
-st.markdown(
-    """
-    <style>
-    .hero-video {
-        width: 100%;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 0 25px rgba(0,0,0,0.4);
-        margin-bottom: 2rem;
-    }
-    video {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-st.markdown('<div class="hero-video">', unsafe_allow_html=True)
 with open(INTRO_VIDEO_PATH, "rb") as f:
-    st.video(f.read(), format="video/mp4", start_time=0)
-st.markdown('</div>', unsafe_allow_html=True)
+    video_bytes = f.read()
+video_base64 = base64.b64encode(video_bytes).decode()
+
+st.markdown(f"""
+<style>
+.hero-container {{
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+            
+}}
+
+.hero-container video {{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: brightness(0.65) contrast(1.2);
+}}
+
+.hero-overlay {{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+}}
+
+.hero-overlay h1 {{
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.7);
+}}
+
+.hero-overlay p {{
+    font-size: 1.5rem;
+    opacity: 0.85;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}}
+</style>
+
+<div class="hero-container">
+  <video autoplay muted loop playsinline>
+    <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
+  </video>
+</div>
+""", unsafe_allow_html=True)
 
 # ---------------------------
 # BACKGROUND + HEADER
